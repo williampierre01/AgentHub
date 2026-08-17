@@ -26,3 +26,8 @@ Este arquivo registra decisões que devem continuar válidas entre diferentes au
 
 **Motivo:** compreender quais problemas o framework resolve e reduzir acoplamento prematuro.
 
+## 005 — Pacotes Conda obtidos somente do conda-forge
+
+**Decisão:** declarar `conda-forge` como canal do ambiente e usar `nodefaults` para impedir que canais da configuração global participem da resolução.
+
+**Motivo:** tornar a origem dos pacotes previsível entre máquinas e evitar que uma configuração global altere silenciosamente o ambiente do projeto.

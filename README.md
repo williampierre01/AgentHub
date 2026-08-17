@@ -22,23 +22,32 @@ Estamos no **Módulo 0 — Ambiente profissional e controle de versões**.
 - [x] Pasta permanente do projeto
 - [x] Estrutura inicial de documentação
 - [x] Repositório Git local
-- [ ] Instalação do Miniconda
-- [ ] Criação do ambiente `agenthub`
-- [ ] Seleção do interpretador no VS Code
-- [ ] Validação do ambiente reproduzível
+- [x] Instalação do Miniconda
+- [x] Criação do ambiente `agenthub`
+- [x] Seleção do interpretador no VS Code
+- [x] Validação do ambiente reproduzível
 - [ ] Primeira aplicação FastAPI
 
 ## Ambiente adotado
 
 - Windows
 - VS Code
-- Conda/Miniconda
+- Miniconda 25.9.1
 - Ambiente Conda: `agenthub`
-- Python: série 3.12
+- Python: série 3.12 (3.12.13 na validação inicial)
+- pip 26.2.1 na validação inicial
 - Git
 - Docker em um módulo posterior
 
 O Python global do Windows não será usado como ambiente do projeto. Dependências e atualizações serão feitas conscientemente dentro do ambiente `agenthub`.
+
+Para reproduzir o ambiente em outra máquina:
+
+```powershell
+conda env create --file environment.yml
+```
+
+Nesta instalação, o plugin de termos do Conda consulta canais globais antes de aplicar o `nodefaults` do projeto. Por isso, a definição também foi validada em modo simulado com plugins externos desativados e o resolvedor clássico; nenhum termo de canal global foi aceito automaticamente.
 
 ## Estrutura inicial
 
@@ -56,5 +65,13 @@ AgentHub/
 
 ## Próximo passo
 
-Instalar o Miniconda, criar o ambiente a partir de `environment.yml` e verificar que o terminal e o VS Code usam o Python correto.
+Criar a primeira aplicação FastAPI, entendendo o papel do servidor ASGI, da instância da aplicação e de um endpoint antes de ampliar a arquitetura.
 
+Para trabalhar no projeto em um terminal PowerShell com o Conda inicializado:
+
+```powershell
+conda activate agenthub
+python --version
+```
+
+O executável esperado nesta máquina é `C:\Users\will\miniconda3\envs\agenthub\python.exe`. A configuração local do VS Code aponta para esse interpretador e não é versionada, pois caminhos de ambientes variam entre computadores.
