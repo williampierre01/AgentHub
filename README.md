@@ -28,6 +28,9 @@ O **Módulo 0 — Ambiente profissional e controle de versões** foi concluído.
 - [x] Validação do ambiente reproduzível
 - [x] Primeira aplicação FastAPI
 - [x] Primeiro endpoint `GET /`
+- [x] Endpoint de disponibilidade `GET /health`
+- [x] Resposta automática `404` para rotas desconhecidas
+- [x] Organização das operações por tags no OpenAPI
 - [x] Primeiro teste de endpoint
 - [x] Validação com o servidor ASGI real
 
@@ -90,6 +93,7 @@ python -m uvicorn app.main:app --reload
 Em `app.main:app`, a primeira parte identifica o módulo Python `app/main.py`; a segunda identifica a variável que contém a instância `FastAPI`.
 
 - API: <http://127.0.0.1:8000/>
+- Disponibilidade: <http://127.0.0.1:8000/health>
 - Documentação Swagger: <http://127.0.0.1:8000/docs>
 - Esquema OpenAPI: <http://127.0.0.1:8000/openapi.json>
 
@@ -101,4 +105,4 @@ python -m pytest -q
 
 ## Próximo passo
 
-Aprofundar o fluxo completo de uma requisição e explorar as operações de rota e a documentação automática antes de introduzir contratos Pydantic.
+Explorar parâmetros de caminho e de consulta, observando como o FastAPI os converte, valida e documenta antes de introduzir contratos Pydantic para corpos JSON.
