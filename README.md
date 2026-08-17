@@ -16,7 +16,7 @@ O projeto crescerá durante o curso: começaremos com uma API pequena e bem estr
 
 ## Estado atual
 
-O **Módulo 0 — Ambiente profissional e controle de versões** foi concluído. Estamos no **Módulo 1 — Fundamentos sólidos de FastAPI**.
+Os **Módulos 0 e 1** foram concluídos. O próximo é o **Módulo 2 — Pydantic e contratos**.
 
 - [x] Diagnóstico inicial do Windows
 - [x] Pasta permanente do projeto
@@ -31,6 +31,9 @@ O **Módulo 0 — Ambiente profissional e controle de versões** foi concluído.
 - [x] Endpoint de disponibilidade `GET /health`
 - [x] Resposta automática `404` para rotas desconhecidas
 - [x] Organização das operações por tags no OpenAPI
+- [x] Parâmetros de caminho e de consulta tipados
+- [x] Conversão de valores HTTP para tipos Python
+- [x] Resposta automática `422` para valores inválidos
 - [x] Primeiro teste de endpoint
 - [x] Validação com o servidor ASGI real
 
@@ -94,8 +97,11 @@ Em `app.main:app`, a primeira parte identifica o módulo Python `app/main.py`; a
 
 - API: <http://127.0.0.1:8000/>
 - Disponibilidade: <http://127.0.0.1:8000/health>
+- Exemplo com parâmetros: <http://127.0.0.1:8000/agents/42?include_status=true>
 - Documentação Swagger: <http://127.0.0.1:8000/docs>
 - Esquema OpenAPI: <http://127.0.0.1:8000/openapi.json>
+
+Em `/agents/{agent_id}`, `agent_id` faz parte do caminho e deve ser inteiro. `include_status` não está no caminho, portanto é interpretado como parâmetro de consulta booleano e assume `false` quando omitido. Valores incompatíveis são rejeitados com `422` antes da execução do endpoint.
 
 Para executar os testes:
 
@@ -105,4 +111,4 @@ python -m pytest -q
 
 ## Próximo passo
 
-Explorar parâmetros de caminho e de consulta, observando como o FastAPI os converte, valida e documenta antes de introduzir contratos Pydantic para corpos JSON.
+Iniciar o Módulo 2 com modelos Pydantic para tornar os corpos de entrada e saída explícitos, validados e precisamente documentados no OpenAPI.

@@ -17,3 +17,18 @@ async def read_root() -> dict[str, str]:
 )
 async def read_health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get(
+    "/agents/{agent_id}",
+    tags=["agents"],
+    summary="Consulta os parâmetros de um agente",
+)
+async def read_agent(
+    agent_id: int,
+    include_status: bool = False,
+) -> dict[str, int | bool]:
+    return {
+        "agent_id": agent_id,
+        "include_status": include_status,
+    }
