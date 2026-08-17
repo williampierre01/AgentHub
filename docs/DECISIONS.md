@@ -37,3 +37,9 @@ Este arquivo registra decisões que devem continuar válidas entre diferentes au
 **Decisão:** desenvolver cada aula em uma branch `codex/aula-NN-tema`, enviá-la ao GitHub e integrá-la em `main` por pull request com descrição completa.
 
 **Motivo:** manter `main` estável e tornar o histórico do curso revisável, permitindo relacionar cada conjunto de mudanças ao objetivo e às verificações da aula.
+
+## 007 — Dependências iniciais da API fixadas
+
+**Decisão:** iniciar a API com `fastapi==0.139.2` e `uvicorn==0.51.0`, e os testes com `httpx2==2.9.0` e `pytest==9.1.1`.
+
+**Motivo:** cada pacote tem uma responsabilidade explícita na primeira aplicação, e a fixação das versões torna o ambiente reproduzível durante o curso.

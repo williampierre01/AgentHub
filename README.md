@@ -16,7 +16,7 @@ O projeto crescerá durante o curso: começaremos com uma API pequena e bem estr
 
 ## Estado atual
 
-Estamos no **Módulo 0 — Ambiente profissional e controle de versões**.
+Os **Módulos 0 e 1** foram concluídos. O próximo é o **Módulo 2 — Pydantic e contratos**.
 
 - [x] Diagnóstico inicial do Windows
 - [x] Pasta permanente do projeto
@@ -26,7 +26,16 @@ Estamos no **Módulo 0 — Ambiente profissional e controle de versões**.
 - [x] Criação do ambiente `agenthub`
 - [x] Seleção do interpretador no VS Code
 - [x] Validação do ambiente reproduzível
-- [ ] Primeira aplicação FastAPI
+- [x] Primeira aplicação FastAPI
+- [x] Primeiro endpoint `GET /`
+- [x] Endpoint de disponibilidade `GET /health`
+- [x] Resposta automática `404` para rotas desconhecidas
+- [x] Organização das operações por tags no OpenAPI
+- [x] Parâmetros de caminho e de consulta tipados
+- [x] Conversão de valores HTTP para tipos Python
+- [x] Resposta automática `422` para valores inválidos
+- [x] Primeiro teste de endpoint
+- [x] Validação com o servidor ASGI real
 
 ## Ambiente adotado
 
@@ -41,6 +50,13 @@ Estamos no **Módulo 0 — Ambiente profissional e controle de versões**.
 
 O Python global do Windows não será usado como ambiente do projeto. Dependências e atualizações serão feitas conscientemente dentro do ambiente `agenthub`.
 
+As primeiras dependências da API são:
+
+- FastAPI 0.139.2 para declarar a aplicação e seus endpoints;
+- Uvicorn 0.51.0 para servir a aplicação por meio do protocolo ASGI;
+- HTTPX2 2.9.0 para simular requisições HTTP nos testes;
+- pytest 9.1.1 para descobrir e executar os testes automatizados.
+
 Para reproduzir o ambiente em outra máquina:
 
 ```powershell
@@ -53,9 +69,14 @@ Nesta instalação, o plugin de termos do Conda consulta canais globais antes de
 
 ```text
 AgentHub/
-├── app/                 # código da aplicação
-├── tests/               # testes automatizados
+├── app/
+│   ├── __init__.py
+│   └── main.py         # instância FastAPI e endpoint inicial
+├── tests/
+│   ├── __init__.py
+│   └── test_main.py    # teste HTTP do endpoint inicial
 ├── docs/                # decisões e anotações permanentes
+├── .github/             # modelo de descrição dos pull requests
 ├── .gitignore
 ├── AGENTS.md            # orientação para futuras tarefas no Codex
 ├── environment.yml      # definição inicial do ambiente Conda
@@ -63,15 +84,31 @@ AgentHub/
 └── ROADMAP.md
 ```
 
-## Próximo passo
+## Executar a API
 
-Criar a primeira aplicação FastAPI, entendendo o papel do servidor ASGI, da instância da aplicação e de um endpoint antes de ampliar a arquitetura.
-
-Para trabalhar no projeto em um terminal PowerShell com o Conda inicializado:
+Em um novo terminal PowerShell:
 
 ```powershell
 conda activate agenthub
-python --version
+python -m uvicorn app.main:app --reload
 ```
 
-O executável esperado nesta máquina é `C:\Users\will\miniconda3\envs\agenthub\python.exe`. A configuração local do VS Code aponta para esse interpretador e não é versionada, pois caminhos de ambientes variam entre computadores.
+Em `app.main:app`, a primeira parte identifica o módulo Python `app/main.py`; a segunda identifica a variável que contém a instância `FastAPI`.
+
+- API: <http://127.0.0.1:8000/>
+- Disponibilidade: <http://127.0.0.1:8000/health>
+- Exemplo com parâmetros: <http://127.0.0.1:8000/agents/42?include_status=true>
+- Documentação Swagger: <http://127.0.0.1:8000/docs>
+- Esquema OpenAPI: <http://127.0.0.1:8000/openapi.json>
+
+Em `/agents/{agent_id}`, `agent_id` faz parte do caminho e deve ser inteiro. `include_status` não está no caminho, portanto é interpretado como parâmetro de consulta booleano e assume `false` quando omitido. Valores incompatíveis são rejeitados com `422` antes da execução do endpoint.
+
+Para executar os testes:
+
+```powershell
+python -m pytest -q
+```
+
+## Próximo passo
+
+Iniciar o Módulo 2 com modelos Pydantic para tornar os corpos de entrada e saída explícitos, validados e precisamente documentados no OpenAPI.
