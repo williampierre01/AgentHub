@@ -19,8 +19,13 @@ Este repositório é, ao mesmo tempo, um projeto de software e um curso prático
 
 ## Versionamento
 
+- Mantenha `main` como branch estável e crie uma branch nova para cada aula antes de alterar arquivos.
+- Nomeie branches de aula no formato `codex/aula-NN-tema`, com número de dois dígitos e tema curto em kebab-case.
 - Use commits pequenos e descritivos.
 - Prefira mensagens no padrão Conventional Commits, como `chore:`, `feat:`, `fix:`, `test:` e `docs:`.
+- Ao concluir uma aula e suas verificações, envie a branch ao GitHub e abra um pull request para `main`.
+- Ao criar um pull request, sempre preencha a descrição com o objetivo, um resumo das mudanças, as verificações executadas e observações ou riscos relevantes.
+- Use o modelo em `.github/pull_request_template.md` como estrutura mínima da descrição do pull request.
 - Nunca inclua arquivos `.env`, credenciais, tokens ou segredos no Git.
 - Não atualize Python ou dependências automaticamente sem necessidade explícita.
 
@@ -29,4 +34,3 @@ Este repositório é, ao mesmo tempo, um projeto de software e um curso prático
 - Mantenha `README.md` com o estado atual e os próximos passos.
 - Mantenha decisões duráveis em `docs/DECISIONS.md`.
 - Atualize `ROADMAP.md` quando o escopo ou a sequência do curso mudar.
-

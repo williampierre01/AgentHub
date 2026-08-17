@@ -31,3 +31,9 @@ Este arquivo registra decisões que devem continuar válidas entre diferentes au
 **Decisão:** declarar `conda-forge` como canal do ambiente e usar `nodefaults` para impedir que canais da configuração global participem da resolução.
 
 **Motivo:** tornar a origem dos pacotes previsível entre máquinas e evitar que uma configuração global altere silenciosamente o ambiente do projeto.
+
+## 006 — Uma branch e um pull request por aula
+
+**Decisão:** desenvolver cada aula em uma branch `codex/aula-NN-tema`, enviá-la ao GitHub e integrá-la em `main` por pull request com descrição completa.
+
+**Motivo:** manter `main` estável e tornar o histórico do curso revisável, permitindo relacionar cada conjunto de mudanças ao objetivo e às verificações da aula.
